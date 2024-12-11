@@ -7,12 +7,19 @@ import menu.exception.ErrorMessage;
 
 public class Coaches {
 
+    private static final int MIN_COACH_SIZE = 2;
+    private static final int MAX_COACH_SIZE = 5;
+
     private final List<Coach> coaches;
 
     public Coaches(List<Coach> coaches) {
         validateSize(coaches);
         validateDuplicate(coaches);
         this.coaches = coaches;
+    }
+
+    public List<Coach> getCoaches() {
+        return new ArrayList<>(coaches);
     }
 
     private void validateDuplicate(List<Coach> coaches) {
@@ -23,16 +30,11 @@ public class Coaches {
     }
 
     private void validateSize(List<Coach> coaches) {
-        if (coaches.size() < 2) {
+        if (coaches.size() < MIN_COACH_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.MIN_COACH_SIZE.getErrorMessage());
         }
-
-        if (coaches.size() > 5) {
+        if (coaches.size() > MAX_COACH_SIZE) {
             throw new IllegalArgumentException(ErrorMessage.MAX_COACH_SIZE.getErrorMessage());
         }
-    }
-
-    public List<Coach> getCoaches() {
-        return new ArrayList<>(coaches);
     }
 }
