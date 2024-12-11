@@ -33,4 +33,8 @@ public class NonEat {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_MENU.getErrorMessage());
         }
     }
+
+    public boolean isContain(String firstMenu) {
+        return nonEat.contains(firstMenu);
+    }
 }
