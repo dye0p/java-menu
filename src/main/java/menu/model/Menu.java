@@ -31,4 +31,11 @@ public enum Menu {
             throw new IllegalArgumentException(ErrorMessage.NOT_FOUNT_MENU.getErrorMessage());
         }
     }
+
+    public static String getCategoryBy(int randomNumber) {
+        Menu[] values = values();
+        Menu value = values[randomNumber - 1];
+
+        return value.category;
+    }
 }
