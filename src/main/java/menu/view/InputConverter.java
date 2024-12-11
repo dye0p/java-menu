@@ -7,6 +7,8 @@ import menu.exception.ErrorMessage;
 
 public class InputConverter {
 
+    private static final String DELIMITER = ",";
+
     public static List<String> convertCoaches(String inputCoaches) {
         return convertToListBy(inputCoaches);
     }
@@ -17,7 +19,7 @@ public class InputConverter {
 
     private static List<String> convertToListBy(String input) {
         try {
-            String[] splitCoaches = input.trim().split(",");
+            String[] splitCoaches = input.trim().split(DELIMITER);
             return appendToList(splitCoaches);
         } catch (PatternSyntaxException exception) {
             throw new IllegalArgumentException(ErrorMessage.DELIMITER_NON.getErrorMessage());
