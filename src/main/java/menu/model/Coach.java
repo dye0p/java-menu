@@ -59,6 +59,10 @@ public class Coach {
         return name;
     }
 
+    public NonEat getNonEat() {
+        return nonEat;
+    }
+
     public void updateNonEat(NonEat nonEat) {
         this.nonEat = nonEat;
     }
