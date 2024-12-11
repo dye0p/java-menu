@@ -7,20 +7,21 @@ import menu.model.Coaches;
 
 public class OutputFormatter {
 
+    private static final String MENU_FORMAT = "[ %s | %s | %s | %s | %s | %s ]";
+    private static final String CATEGORY_FORMAT = "[ 카테고리 | %s | %s | %s | %s | %s ]";
+
     public static String resultFormat(List<String> categories, Coaches coaches) {
         StringJoiner sj = new StringJoiner(System.lineSeparator());
 
-        String categoryFormat = String.format("[ 카테고리 | %s | %s | %s | %s | %s ]",
-                categories.get(0),
-                categories.get(1),
-                categories.get(2),
-                categories.get(3),
-                categories.get(4));
+        formatingCategories(categories, sj);
+        formatingMenus(coaches, sj);
 
-        sj.add(categoryFormat);
+        return sj.toString();
+    }
 
+    private static void formatingMenus(Coaches coaches, StringJoiner sj) {
         for (Coach coach : coaches.getCoaches()) {
-            String menuFormat = String.format("[ %s | %s | %s | %s | %s | %s ]",
+            String menuFormat = String.format(MENU_FORMAT,
                     coach.getName(),
                     coach.getRecommendMenu().get(0),
                     coach.getRecommendMenu().get(1),
@@ -30,7 +31,16 @@ public class OutputFormatter {
 
             sj.add(menuFormat);
         }
+    }
 
-        return sj.toString();
+    private static void formatingCategories(List<String> categories, StringJoiner sj) {
+        String categoryFormat = String.format(CATEGORY_FORMAT,
+                categories.get(0),
+                categories.get(1),
+                categories.get(2),
+                categories.get(3),
+                categories.get(4));
+
+        sj.add(categoryFormat);
     }
 }
