@@ -8,16 +8,34 @@ import menu.exception.ErrorMessage;
 
 public class Coach {
 
+    private static final int INDEX = 0;
+    private static final int MAX_NAME_SIZE = 4;
+    private static final int MIN_NAME_SIZE = 2;
+
     private final String name;
     private NonEat nonEat;
     private final List<String> recommendMenu = new ArrayList<>();
 
     public Coach(String name) {
-        if (name.length() > 4 || name.length() < 2) {
-            throw new IllegalArgumentException(ErrorMessage.NAME_SIZE.getErrorMessage());
-        }
-
+        validateSize(name);
         this.name = name;
+    }
+
+    public void recommendFrom(List<String> menus) {
+        //메뉴 리스트를 섞고 첫 번째 메뉴를 가져온다.
+        String firstMenu = shuffleMenu(menus);
+        if (canNotRecommend(firstMenu)) {
+            recommendFrom(menus);
+        }
+        recommendMenu.add(firstMenu);
+    }
+
+    private String shuffleMenu(List<String> menus) {
+        return Randoms.shuffle(menus).get(INDEX);
+    }
+
+    private boolean canNotRecommend(String firstMenu) {
+        return recommendMenu.contains(firstMenu) || nonEat.isContain(firstMenu);
     }
 
     @Override
@@ -45,19 +63,13 @@ public class Coach {
         this.nonEat = nonEat;
     }
 
-    public void recommendFrom(List<String> menus) {
-        //메뉴 리스트를 섞고 첫 번째 메뉴를 가져온다.
-        String firstMenu = Randoms.shuffle(menus).get(0);
-
-        //이미 추천 했거나, 못 먹거나
-        if (recommendMenu.contains(firstMenu) || nonEat.isContain(firstMenu)) {
-            recommendFrom(menus);
-        }
-        //메뉴가 추가할 수 있는 경우 추가한다.
-        recommendMenu.add(firstMenu);
-    }
-
     public List<String> getRecommendMenu() {
         return new ArrayList<>(recommendMenu);
+    }
+
+    private void validateSize(String name) {
+        if (name.length() > MAX_NAME_SIZE || name.length() < MIN_NAME_SIZE) {
+            throw new IllegalArgumentException(ErrorMessage.NAME_SIZE.getErrorMessage());
+        }
     }
 }
