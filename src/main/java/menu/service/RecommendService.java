@@ -3,7 +3,6 @@ package menu.service;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
-import menu.model.Coach;
 import menu.model.Coaches;
 import menu.model.DayOfWeek;
 import menu.model.Menu;
@@ -25,11 +24,8 @@ public class RecommendService {
             String category = recommendCategory();
 
             //각 코치가 먹을 음식을 정한다.
-            //카테고리에 해당하는 메뉴 리스트를 가져온다.
             List<String> menus = Menu.getMenusBy(category);
-            for (Coach coach : coaches.getCoaches()) {
-                coach.recommendFrom(menus);
-            }
+            coaches.recommendMenu(menus);
         }
     }
 

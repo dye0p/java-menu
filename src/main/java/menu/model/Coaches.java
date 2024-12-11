@@ -18,6 +18,12 @@ public class Coaches {
         this.coaches = coaches;
     }
 
+    public void recommendMenu(List<String> menus) {
+        for (Coach coach : coaches) {
+            coach.recommendFrom(menus);
+        }
+    }
+
     public List<Coach> getCoaches() {
         return new ArrayList<>(coaches);
     }
