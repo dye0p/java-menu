@@ -38,4 +38,13 @@ public enum Menu {
 
         return value.category;
     }
+
+    public static List<String> getMenusBy(String category) {
+        Menu menu = Arrays.stream(values())
+                .filter(value -> value.category.equals(category))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_FOUND_CATEGORY.getErrorMessage()));
+
+        return menu.menus;
+    }
 }
