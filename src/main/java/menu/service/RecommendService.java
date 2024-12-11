@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import menu.model.Coach;
 import menu.model.Coaches;
+import menu.model.DayOfWeek;
 import menu.model.Menu;
 
 public class RecommendService {
 
     private final Coaches coaches;
-    private final List<String> categories = new ArrayList<>(); //한 주의 추천 카테고리
+    private final List<String> categories = new ArrayList<>();
 
     public RecommendService(Coaches coaches) {
         this.coaches = coaches;
@@ -19,7 +20,7 @@ public class RecommendService {
     // 코치, 카테고리, 메뉴
     public void recommend() {
         //월~금 반복
-        for (int i = 0; i < 5; i++) {
+        for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
             //랜덤으로 번호를 생성해 카테고리를 가져온다.
             String category = recommendCategory();
 
@@ -56,9 +57,5 @@ public class RecommendService {
 
     public List<String> getCategories() {
         return categories;
-    }
-
-    public Coaches getCoaches() {
-        return coaches;
     }
 }
