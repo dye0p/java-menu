@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import menu.model.Coach;
 import menu.model.Coaches;
 import menu.model.NonEat;
+import menu.service.RecommendService;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -26,6 +27,13 @@ public class MenuController {
         for (Coach coach : coaches.getCoaches()) {
             tryNonEat(coach);
         }
+
+        //메뉴 추천
+        RecommendService recommendService = new RecommendService(coaches);
+        recommendService.recommend();
+        List<String> categories = recommendService.getCategories();
+
+        outputView.printResult(categories, coaches);
     }
 
     private void tryNonEat(Coach coach) {
