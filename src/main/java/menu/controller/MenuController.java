@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import menu.model.Coach;
 import menu.model.Coaches;
+import menu.model.NonEat;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -21,6 +22,19 @@ public class MenuController {
     public void run() {
         outputView.printWellComeMessage();
         Coaches coaches = tryReadCoaches();
+
+        for (Coach coach : coaches.getCoaches()) {
+            tryNonEat(coach);
+        }
+    }
+
+    private void tryNonEat(Coach coach) {
+        requestRead(() -> {
+            List<String> nonEats = inputView.readNonEat(coach.getName());
+            NonEat nonEat = new NonEat(nonEats);
+            coach.updateNonEat(nonEat);
+            return null;
+        });
     }
 
 
@@ -50,5 +64,4 @@ public class MenuController {
             }
         }
     }
-
 }

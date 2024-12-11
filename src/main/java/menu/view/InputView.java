@@ -13,6 +13,14 @@ public class InputView {
         String coaches = Console.readLine();
 
         return InputConverter.convertCoaches(coaches);
+    }
 
+    public List<String> readNonEat(String name) {
+        String format = String.format("%s(이)가 못 먹는 메뉴를 입력해 주세요.", name);
+        System.out.println(NEXT_LINE + format);
+
+        String nonEat = Console.readLine();
+
+        return InputConverter.convertNonEat(nonEat);
     }
 }

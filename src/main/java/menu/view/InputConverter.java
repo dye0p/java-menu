@@ -11,20 +11,24 @@ public class InputConverter {
         return convertToListBy(inputCoaches);
     }
 
-    private static List<String> convertToListBy(String inputCoaches) {
+    public static List<String> convertNonEat(String nonEat) {
+        return convertToListBy(nonEat);
+    }
+
+    private static List<String> convertToListBy(String input) {
         try {
-            String[] splitCoaches = inputCoaches.trim().split(",");
+            String[] splitCoaches = input.trim().split(",");
             return appendToList(splitCoaches);
         } catch (PatternSyntaxException exception) {
             throw new IllegalArgumentException(ErrorMessage.DELIMITER_NON.getErrorMessage());
         }
     }
 
-    private static List<String> appendToList(String[] splitCoaches) {
-        List<String> coaches = new ArrayList<>();
-        for (String splitCoach : splitCoaches) {
-            coaches.add(splitCoach.trim());
+    private static List<String> appendToList(String[] inputs) {
+        List<String> list = new ArrayList<>();
+        for (String input : inputs) {
+            list.add(input.trim());
         }
-        return coaches;
+        return list;
     }
 }
