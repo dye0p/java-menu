@@ -1,5 +1,6 @@
 package menu.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import menu.exception.ErrorMessage;
@@ -29,5 +30,9 @@ public class Coaches {
         if (coaches.size() > 5) {
             throw new IllegalArgumentException(ErrorMessage.MAX_COACH_SIZE.getErrorMessage());
         }
+    }
+
+    public List<Coach> getCoaches() {
+        return new ArrayList<>(coaches);
     }
 }
